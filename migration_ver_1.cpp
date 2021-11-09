@@ -3,15 +3,19 @@
 */
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
+#include "Windows.h"
 #include "processthreadsapi.h"
 
 using namespace std;
 
-void main(){
+int main(){
+    ofstream oFile;
+    oFile.open("output.txt");
+
     DWORD processorNumber = GetCurrentProcessorNumber();
 
-    cout << processorNumber << endl;
+    oFile << processorNumber << endl;
     
-
 }

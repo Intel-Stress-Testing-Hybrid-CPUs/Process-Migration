@@ -17,5 +17,5 @@ $p.StartInfo = $pinfo
 #Start the process
 $p.Start()
 
-#Set processor affinity to 0100
+#Set processor affinity bitmap to 0100
 $p.ProcessorAffinity=0x4
