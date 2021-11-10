@@ -3,7 +3,7 @@
 
 
 #replace app.exe with actual application name
-$app_name = "C:\Program Files (x86)\Notepad++\notepad++.exe"
+$app_name = "C:\Users\nickt\Documents\UT\Intel-Stress-Testing-Hybrid-CPUs\Process-Migration\migration_ver_1.exe"
 #$app_arguments = "arg0"
 
 #Create start info for Process Object

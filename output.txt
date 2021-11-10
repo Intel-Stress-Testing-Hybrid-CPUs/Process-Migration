@@ -1,0 +1,3 @@
+Number of processors: 8
+Current running proccessor: 2
+Current running proccessor: 2
