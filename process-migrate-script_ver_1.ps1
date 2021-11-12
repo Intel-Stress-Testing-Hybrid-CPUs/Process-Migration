@@ -2,7 +2,7 @@
 #Powershell script for starting a process and changing the running core of the process
 
 
-#replace app.exe with actual application name
+#Replace this executable pathname with your own path to executable
 $app_name = "C:\Users\nickt\Documents\UT\Intel-Stress-Testing-Hybrid-CPUs\Process-Migration\migration_ver_1.exe"
 #$app_arguments = "arg0"
 
