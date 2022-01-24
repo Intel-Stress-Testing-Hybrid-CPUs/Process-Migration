@@ -12,10 +12,16 @@
 
 using namespace std;
 
-int main(){
+int main(int argc, char* argv[]){
     //Open file stream to output file output.txt
     ofstream oFile;
     oFile.open("C:\\Users\\nickt\\Documents\\UT\\Intel-Stress-Testing-Hybrid-CPUs\\Process-Migration\\output.txt");
+
+    char* procID = argv[1];
+
+    oFile << "PID of new process: " << procID << endl;
+
+    /*
 
     //Get the total number of processors in the system and output to file
     SYSTEM_INFO sysinfo;
@@ -39,6 +45,6 @@ int main(){
             }
         }
     }
-
+    */
     
 }
