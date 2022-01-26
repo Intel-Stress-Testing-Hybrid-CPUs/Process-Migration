@@ -17,7 +17,7 @@ echo "Process ID:" $procid
 
 #Replace this executable pathname with your own path to logging executable
 $cpp_name = "C:\Users\nickt\Documents\UT\Intel-Stress-Testing-Hybrid-CPUs\Process-Migration\migration_ver_1.exe"
-$cpp_arguments = "5555"
+$cpp_arguments = $procid
 
 #Create start info for Process Object
 $loginfo = New-Object System.Diagnostics.ProcessStartInfo 
