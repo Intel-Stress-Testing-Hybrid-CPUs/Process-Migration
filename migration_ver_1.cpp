@@ -7,15 +7,69 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <string>
 #include "Windows.h"
 #include "processthreadsapi.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]){
-    //Open file stream to output file output.txt
+    //Open file stream to output file
     ofstream oFile;
-    oFile.open("C:\\Users\\nickt\\Documents\\UT\\Intel-Stress-Testing-Hybrid-CPUs\\Process-Migration\\output.txt");
+
+    //Get timestamp for output file 
+    SYSTEMTIME lt;
+    GetLocalTime(&lt);
+    string year = std::to_string(lt.wYear);
+    string month;
+    switch(lt.wMonth){
+        case 1: 
+            month = "Jan";
+            break;
+        case 2: 
+            month = "Feb";
+            break;
+        case 3: 
+            month = "Mar";
+            break;
+        case 4: 
+            month = "Apr";
+            break;
+        case 5: 
+            month = "May";
+            break;
+        case 6: 
+            month = "Jun";
+            break;
+        case 7: 
+            month = "Jul";
+            break;
+        case 8: 
+            month = "Aug";
+            break;
+        case 9: 
+            month = "Sep";
+            break;
+        case 10: 
+            month = "Oct";
+            break;
+        case 11: 
+            month = "Nov";
+            break;
+        case 12: 
+            month = "Dec";
+            break;
+    }    
+    string day = std::to_string(lt.wDay);
+    string hour = std::to_string(lt.wHour);
+    string minute = std::to_string(lt.wMinute);
+    string second = std::to_string(lt.wSecond);
+
+    string timeStamp = year + month + day + "_" + hour + "-" + minute + "-" + second;
+    string outputPath = "C:\\Users\\nickt\\Documents\\UT\\Intel-Stress-Testing-Hybrid-CPUs\\Process-Migration\\logging_output\\" + timeStamp + ".txt";
+
+    //Generate a new logging output file in the logging_output folder
+    oFile.open(outputPath);
 
     char* procID = argv[1];
 
