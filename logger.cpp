@@ -9,14 +9,67 @@
 #include <cstdlib>
 #include <string>
 #include "Windows.h"
-#include "processthreadsapi.h"
+//#include "processthreadsapi.h"
 
 using namespace std;
+
+string getTimestamp();
 
 int main(int argc, char* argv[]){
     //Open file stream to output file
     ofstream oFile;
 
+    string outputPath = ".\\logging_output\\" + getTimestamp() + ".txt";
+
+    //Generate a new logging output file in the logging_output folder
+    oFile.open(outputPath);
+
+    char* procID = argv[1];
+
+    oFile << "PID of new process: " << procID << endl;
+
+    //get a handle to the process launched by the migration script
+    HANDLE proc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)procID);
+    if(proc == NULL){
+        oFile << "ERROR opening the process [PID: " << procID << "]" << endl;
+    } else {
+        // log info about the process
+    }
+
+    /*
+
+    //Get the total number of processors in the system and output to file
+    SYSTEM_INFO sysinfo;
+    GetSystemInfo(&sysinfo);
+    int numCPU = sysinfo.dwNumberOfProcessors;
+    oFile << "Number of processors: " << numCPU << endl;
+
+    //Loop for 1000 iterations
+    for(int  i = 0; i < 1000000; i++){
+    //Get current processor number for this executable then output to file
+        DWORD processorNumber;
+        if(i == 0){
+            DWORD processorNumber = GetCurrentProcessorNumber();
+            oFile << "Current running proccessor: " << processorNumber << endl;
+        } else {
+            //On each iteration, only output to files if processorNumber changes value
+            DWORD newNumber = GetCurrentProcessorNumber();
+            if(newNumber != processorNumber){
+                processorNumber = newNumber;
+                oFile << "Current running proccessor: " << processorNumber << endl;
+            }
+        }
+    }
+    */
+    
+}
+
+/**
+ * get the string representation for the current date and time
+ * used for logging persistence
+ * format: YYYYmonthDD_hr-min-sec  ex:"2022Feb02_13_3_20"
+ */
+string getTimestamp() {
     //Get timestamp for output file 
     SYSTEMTIME lt;
     GetLocalTime(&lt);
@@ -68,39 +121,5 @@ int main(int argc, char* argv[]){
 
     //Format is yearmonthday_hr-min-sec like "2022Feb02_13_3_20"
     string timeStamp = year + month + day + "_" + hour + "-" + minute + "-" + second;
-    string outputPath = "C:\\Users\\nickt\\Documents\\UT\\Intel-Stress-Testing-Hybrid-CPUs\\Process-Migration\\logging_output\\" + timeStamp + ".txt";
-
-    //Generate a new logging output file in the logging_output folder
-    oFile.open(outputPath);
-
-    char* procID = argv[1];
-
-    oFile << "PID of new process: " << procID << endl;
-
-    /*
-
-    //Get the total number of processors in the system and output to file
-    SYSTEM_INFO sysinfo;
-    GetSystemInfo(&sysinfo);
-    int numCPU = sysinfo.dwNumberOfProcessors;
-    oFile << "Number of processors: " << numCPU << endl;
-
-    //Loop for 1000 iterations
-    for(int  i = 0; i < 1000000; i++){
-    //Get current processor number for this executable then output to file
-        DWORD processorNumber;
-        if(i == 0){
-            DWORD processorNumber = GetCurrentProcessorNumber();
-            oFile << "Current running proccessor: " << processorNumber << endl;
-        } else {
-            //On each iteration, only output to files if processorNumber changes value
-            DWORD newNumber = GetCurrentProcessorNumber();
-            if(newNumber != processorNumber){
-                processorNumber = newNumber;
-                oFile << "Current running proccessor: " << processorNumber << endl;
-            }
-        }
-    }
-    */
-    
+    return timeStamp;
 }

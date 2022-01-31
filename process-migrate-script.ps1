@@ -15,8 +15,8 @@ $p.Start()
 $procid  =  get-process $p.ProcessName |select -expand id
 echo "Process ID:" $procid
 
-#Replace this executable pathname with your own path to logging executable
-$cpp_name = "C:\Users\nickt\Documents\UT\Intel-Stress-Testing-Hybrid-CPUs\Process-Migration\logger.exe"
+#set path to logging executable relative to this script
+$cpp_name = Join-Path $MyInvocation.MyCommand.Path "logger.exe"
 $cpp_arguments = $procid
 
 #Create start info for Process Object
