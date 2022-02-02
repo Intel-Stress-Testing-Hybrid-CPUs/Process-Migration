@@ -16,7 +16,7 @@ $procid  =  get-process $p.ProcessName |select -expand id
 echo "Process ID:" $procid
 
 #set path to logging executable relative to this script
-$cpp_name = Join-Path $MyInvocation.MyCommand.Path "logger.exe"
+$cpp_name = Join-Path $PSScriptRoot "logger.exe"
 $cpp_arguments = $procid
 
 #Create start info for Process Object
