@@ -28,8 +28,10 @@ int main(int argc, char* argv[]){
 
     oFile << "PID of new process: " << procID << endl;
 
+    DWORD processID = strtoul(procID, NULL, 10);
+
     //get a handle to the process launched by the migration script
-    HANDLE proc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)procID);
+    HANDLE proc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processID);
     if(proc == NULL){
         oFile << "ERROR opening the process [PID: " << procID << "]" << endl;
     } else {
