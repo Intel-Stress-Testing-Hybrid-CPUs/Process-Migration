@@ -1,3 +1,0 @@
-PID of new process: 12156
-Process Affinity Mask: 255
-System Affinity Mask: 255

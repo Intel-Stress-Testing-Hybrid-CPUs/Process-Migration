@@ -1,2 +1,0 @@
-PID of new process: 20624
-ERROR opening the process [PID: 20624]

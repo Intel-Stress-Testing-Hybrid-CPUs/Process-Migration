@@ -32,4 +32,4 @@ $logger.StartInfo = $loginfo
 $logger.Start()
 
 #Set processor affinity bitmap to 0100
-#$p.ProcessorAffinity=0x4
+$p.ProcessorAffinity=0x4
