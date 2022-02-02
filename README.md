@@ -1,5 +1,5 @@
 # Process-Migration
-Repository for all code pertaining to the objective of testing process migration on CPUs.
+Repository for all code pertaining to the objective of testing process migration and functional equivalence of cores on CPUs.
 
 ## Files 
 ### `logger.cpp`
