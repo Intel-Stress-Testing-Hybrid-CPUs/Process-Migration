@@ -40,8 +40,8 @@ int main(int argc, char* argv[]){
         oFile << "Handle Obtained Successfully" << endl;
 
         //Grab the process' affinity mask
-        PDWORD_PTR lpProcessAffinityMask, lpSystemAffinityMask;
-        bool success = GetProcessAffinityMask(proc, lpProcessAffinityMask, lpSystemAffinityMask);
+        ULONG_PTR lpProcessAffinityMask, lpSystemAffinityMask;
+        bool success = GetProcessAffinityMask(proc, &lpProcessAffinityMask, &lpSystemAffinityMask);
         if(!success){
             oFile << "GetProcessAffinityMask failed" << endl;
             oFile << "ERROR obtaining process affinity mask for [PID: " << procID << "]" << endl;
