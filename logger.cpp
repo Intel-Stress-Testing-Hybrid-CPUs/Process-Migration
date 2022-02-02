@@ -9,66 +9,17 @@
 #include <cstdlib>
 #include <string>
 #include "Windows.h"
-#include "processthreadsapi.h"
+//#include "processthreadsapi.h"
 
 using namespace std;
+
+string getTimestamp();
 
 int main(int argc, char* argv[]){
     //Open file stream to output file
     ofstream oFile;
 
-    //Get timestamp for output file 
-    SYSTEMTIME lt;
-    GetLocalTime(&lt);
-    
-    string year = std::to_string(lt.wYear);
-    string month;
-    switch(lt.wMonth){
-        case 1: 
-            month = "Jan";
-            break;
-        case 2: 
-            month = "Feb";
-            break;
-        case 3: 
-            month = "Mar";
-            break;
-        case 4: 
-            month = "Apr";
-            break;
-        case 5: 
-            month = "May";
-            break;
-        case 6: 
-            month = "Jun";
-            break;
-        case 7: 
-            month = "Jul";
-            break;
-        case 8: 
-            month = "Aug";
-            break;
-        case 9: 
-            month = "Sep";
-            break;
-        case 10: 
-            month = "Oct";
-            break;
-        case 11: 
-            month = "Nov";
-            break;
-        case 12: 
-            month = "Dec";
-            break;
-    }    
-    string day = std::to_string(lt.wDay);
-    string hour = std::to_string(lt.wHour);
-    string minute = std::to_string(lt.wMinute);
-    string second = std::to_string(lt.wSecond);
-
-    //Format is yearmonthday_hr-min-sec like "2022Feb02_13_3_20"
-    string timeStamp = year + month + day + "_" + hour + "-" + minute + "-" + second;
-    string outputPath = "C:\\Users\\nickt\\Documents\\UT\\Intel-Stress-Testing-Hybrid-CPUs\\Process-Migration\\logging_output\\" + timeStamp + ".txt";
+    string outputPath = ".\\logging_output\\" + getTimestamp() + ".txt";
 
     //Generate a new logging output file in the logging_output folder
     oFile.open(outputPath);
@@ -76,6 +27,16 @@ int main(int argc, char* argv[]){
     char* procID = argv[1];
 
     oFile << "PID of new process: " << procID << endl;
+
+    DWORD processID = strtoul(procID, NULL, 10);
+
+    //get a handle to the process launched by the migration script
+    HANDLE proc = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processID);
+    if(proc == NULL){
+        oFile << "ERROR opening the process [PID: " << procID << "]" << endl;
+    } else {
+        // log info about the process
+    }
 
     /*
 
@@ -103,4 +64,26 @@ int main(int argc, char* argv[]){
     }
     */
     
+}
+
+/**
+ * get the string representation for the current date and time
+ * used for logging persistence
+ * format: YYYY_month_DD_hr-min-sec  ex:"2022_2_2-13-3-20"
+ */
+string getTimestamp() {
+    //Get timestamp for output file 
+    SYSTEMTIME lt;
+    GetLocalTime(&lt);
+    
+    string year = std::to_string(lt.wYear);
+    string month = std::to_string(lt.wMonth);
+    string day = std::to_string(lt.wDay);
+    string hour = std::to_string(lt.wHour);
+    string minute = std::to_string(lt.wMinute);
+    string second = std::to_string(lt.wSecond);
+
+    //Format is yearmonthday_hr-min-sec like "2022_2_2_13-3-20"
+    string timeStamp = year + "_" + month + "_" + day + "_" + hour + "-" + minute + "-" + second;
+    return timeStamp;
 }
