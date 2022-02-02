@@ -1,0 +1,2 @@
+PID of new process: 22700
+Handle Obtained Successfully
