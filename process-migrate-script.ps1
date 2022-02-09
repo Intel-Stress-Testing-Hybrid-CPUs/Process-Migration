@@ -32,17 +32,17 @@ $logger.StartInfo = $loginfo
 $logger.Start()
 
 #Wait until logging executable has begun to proceed
-Start-Sleep -s 1
+Start-Sleep -m 50
 
 #Rotate processor affinity mask from 0001 to 1000 and back to 0001
 $p.ProcessorAffinity=0x1
-Start-Sleep -s 1
+Start-Sleep -m 50
 $p.ProcessorAffinity=0x2
-Start-Sleep -s 1
+Start-Sleep -m 50
 $p.ProcessorAffinity=0x4
-Start-Sleep -s 1
+Start-Sleep -m 50
 $p.ProcessorAffinity=0x8
-Start-Sleep -s 1
+Start-Sleep -m 50
 
 #Terminate ruinning process, which should also end the logging executable
 $p.Kill()
