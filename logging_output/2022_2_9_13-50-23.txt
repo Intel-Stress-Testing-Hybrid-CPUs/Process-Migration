@@ -1,0 +1,12 @@
+PID of new process: 30420
+Handle Obtained Successfully
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 2
+GetProcessAffinityMask was successful
+Process Affinity Mask: 4
+GetProcessAffinityMask was successful
+Process Affinity Mask: 8
