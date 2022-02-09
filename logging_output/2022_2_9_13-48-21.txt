@@ -1,5 +1,6 @@
-PID of new process: 21520
+PID of new process: 26964
 Handle Obtained Successfully
 GetProcessAffinityMask was successful
 Process Affinity Mask: 255
-System Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
