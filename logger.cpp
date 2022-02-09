@@ -1,7 +1,8 @@
 /* migration version 1.0
 *  Intel Stress Testing Hybrid CPUs Senior Design Project
 *  
-*  This program is a running executable that outputs its current running processor core
+*  This program is a running executable that gets a handle for a process when given it PID then logs information
+*  about that running process.
 */
 
 #include <iostream>
@@ -43,11 +44,14 @@ int main(int argc, char* argv[]){
         //Continuously obtain process affinity mask until process has terminated
         DWORD exitCode = 0;
         ULONG_PTR lpProcessAffinityMask = 0, lpSystemAffinityMask = 0;
+
         while(GetExitCodeProcess(proc, &exitCode) && exitCode == STILL_ACTIVE){
-        //Grab the process' affinity mask
+            //Grab the process' affinity mask
             ULONG_PTR oldAffinityMask = lpProcessAffinityMask;
             bool success = GetProcessAffinityMask(proc, &lpProcessAffinityMask, &lpSystemAffinityMask);
+            
             if(!success){
+                //If not successful, break while loop
                 oFile << "ERROR obtaining process affinity mask for [PID: " << procID << "]" << endl;
                 break;
             } else {
