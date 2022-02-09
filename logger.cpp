@@ -10,6 +10,7 @@
 #include <string>
 #include "Windows.h"
 #include "WinBase.h"
+#include "minwinbase.h"
 //#include "processthreadsapi.h"
 
 using namespace std;
@@ -39,16 +40,25 @@ int main(int argc, char* argv[]){
         // log info about the process
         oFile << "Handle Obtained Successfully" << endl;
 
+        //Continuously obtain process affinity mask until process has terminated
+        DWORD exitCode = 0;
+        ULONG_PTR lpProcessAffinityMask = 0, lpSystemAffinityMask = 0;
+        while(GetExitCodeProcess(proc, &exitCode) && exitCode == STILL_ACTIVE){
         //Grab the process' affinity mask
-        ULONG_PTR lpProcessAffinityMask, lpSystemAffinityMask;
-        bool success = GetProcessAffinityMask(proc, &lpProcessAffinityMask, &lpSystemAffinityMask);
-        if(!success){
-            oFile << "GetProcessAffinityMask failed" << endl;
-            oFile << "ERROR obtaining process affinity mask for [PID: " << procID << "]" << endl;
-        } else {
-            oFile << "GetProcessAffinityMask was successful" << endl;
-            oFile << "Process Affinity Mask: " << lpProcessAffinityMask <<  endl;
-            oFile << "System Affinity Mask: " << lpSystemAffinityMask <<  endl;
+            ULONG_PTR oldAffinityMask = lpProcessAffinityMask;
+            bool success = GetProcessAffinityMask(proc, &lpProcessAffinityMask, &lpSystemAffinityMask);
+            if(!success){
+                oFile << "ERROR obtaining process affinity mask for [PID: " << procID << "]" << endl;
+                break;
+            } else {
+                //Only print process affinity mask if it is different than the one before
+                if(oldAffinityMask == lpProcessAffinityMask){
+                    continue;
+                } else {
+                    oFile << "GetProcessAffinityMask was successful" << endl;
+                    oFile << "Process Affinity Mask: " << lpProcessAffinityMask <<  endl;
+                }
+            }
         }
     }
 
