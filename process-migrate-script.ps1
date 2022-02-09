@@ -42,6 +42,7 @@ Start-Sleep -s 1
 $p.ProcessorAffinity=0x4
 Start-Sleep -s 1
 $p.ProcessorAffinity=0x8
+Start-Sleep -s 1
 
 #Terminate ruinning process, which should also end the logging executable
 $p.Kill()
