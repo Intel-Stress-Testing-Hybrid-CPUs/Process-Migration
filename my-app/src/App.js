@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import './index.js';
+import Script from './component/Script';
 
 function App() {
   return (
@@ -10,10 +10,7 @@ function App() {
 
       </header>
       <body>
-        <Script 
-          onClick = {i => this.handleClick(i)}
-        
-        />
+        <Script />
       </body>
     </div>
   );
