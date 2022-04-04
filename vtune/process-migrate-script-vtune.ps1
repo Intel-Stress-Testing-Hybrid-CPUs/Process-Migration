@@ -11,7 +11,12 @@
 # $p.StartInfo = $pinfo
 # $p.Start()
 
-# either hardcode the process name (prime95), or receive from vtune-script
+#Wait until prime95 has been started by VTune script
+Start-Sleep -m 50
+
+#Either hardcode the process name (prime95), or receive from vtune-script
+#Uses Get-Process cmdlet which gets a process object given the name or PID of a running process
+$p = Get-Process prime95
 
 #Get the PID of the new process
 $procid  =  get-process $p.ProcessName |select -expand id
@@ -36,12 +41,11 @@ $logger.Start()
 #Wait until logging executable has begun to proceed
 Start-Sleep -m 50
 
-# must wait for vtune to have launched prime95 -- the previous wait may have accomplished this
-
 #Set processor affinity mask to a single core for baseline homogeneous testing
 $p.ProcessorAffinity=0x1
 
 # either have this script terminate prime95 after some period of time, or we must manually kill
 
+
 #Terminate running process, which should also end the logging executable
-# $p.Kill()
+$p.Kill()
