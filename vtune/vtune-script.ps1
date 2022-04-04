@@ -16,7 +16,10 @@ $app_path = ".\prime95\prime95.exe"
 $vtune_cmd = "vtune -collect uarch-exploration -- `"$app_path`""
 
 # command to generate report to file
-$vtune_report = "vtune -report hw-events -r `"..\vtune-results\`""
+$vtune_report = "vtune -report hw-events -r \results\"
+
+# get timestamp for output file
+$timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 
 # setup environment vars, launch uarch-exploration, generate report
-cmd.exe /k "`"$vars_path`"&&$vtune_cmd&&$vtune_report"
+cmd.exe /k "`"$vars_path`"&&$vtune_cmd&&$vtune_report" 
