@@ -1,0 +1,2 @@
+# ignore the vtune run directories
+vtune/r0*/
