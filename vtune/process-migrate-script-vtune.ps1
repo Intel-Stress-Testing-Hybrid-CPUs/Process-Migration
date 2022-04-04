@@ -12,7 +12,7 @@
 # $p.Start()
 
 #Wait until prime95 has been started by VTune script
-Start-Sleep -m 50
+Start-Sleep -s 5
 
 #Either hardcode the process name (prime95), or receive from vtune-script
 #Uses Get-Process cmdlet which gets a process object given the name or PID of a running process
@@ -48,4 +48,5 @@ $p.ProcessorAffinity=0x1
 
 
 #Terminate running process, which should also end the logging executable
+Start-Sleep -s 15
 $p.Kill()
