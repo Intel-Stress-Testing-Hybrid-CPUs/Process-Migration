@@ -12,20 +12,20 @@ $vars_path = Join-Path $vtune_path "vtune-vars.bat"
 #$app_path = "C:\Program Files (x86)\Notepad++\notepad++.exe"
 $app_path = ".\prime95\prime95.exe"
 
-# path to migration-script
-#$migration_path = ".\process-migrate-script-vtune.ps1"
-
 # command for uarch-exploration
-$vtune_cmd = "vtune -collect uarch-exploration -- `"$app_path`""
+$vtune_cmd = "vtune -collect uarch-exploration -- $app_path"
 
 # get timestamp for output file
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 
 # command to generate report to file
-$vtune_report = "vtune -report hw-events -report-output ./results/$timestamp.txt"
+$vtune_report = "vtune -report hw-events -report-width 60 -report-output ./results/$timestamp.txt"
 
 # launch process migration script
 Start-Process powershell {.\process-migrate-script-vtune.ps1}
 
-# setup environment vars, launch uarch-exploration, generate report
-cmd.exe /k "`"$vars_path`"&&$vtune_cmd&&$vtune_report" 
+# setup environment vars, launch uarch-exploration
+cmd.exe /k "`"$vars_path`" && $vtune_cmd & exit"
+
+# generate report once collection has finished
+cmd.exe /k "`"$vars_path`" && $vtune_report"
