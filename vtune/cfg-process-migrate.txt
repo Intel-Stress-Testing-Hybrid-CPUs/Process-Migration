@@ -1,0 +1,8 @@
+[target_app]
+target_app=prime95
+[timeout]
+timeout=30
+[migration_mode]
+migration_mode=single
+[testing_duration]
+testing_duration=30

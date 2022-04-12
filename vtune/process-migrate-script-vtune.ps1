@@ -1,22 +1,36 @@
 #process-migrate-script.ps1
-#version 2.0
 #Powershell script for starting a process and changing the running core of the process
 
-#Create process to be run that the logging executable will attach itself to when given the PID
-# $app_name = "C:\Program Files (x86)\Notepad++\notepad++.exe"
+# read arguments from cfg file
+Get-Content ".\cfg-process-migrate.txt" | ForEach-Object -Begin {$settings=@{}} -Process {$store = [regex]::split($_,'='); if(($store[0].CompareTo("") -ne 0) -and ($store[0].StartsWith("[") -ne $True) -and ($store[0].StartsWith("#") -ne $True)) {$settings.Add($store[0], $store[1])}}
+# timeout period, in seconds
+$timeout = $settings.Get_Item("timeout")
+# name of application to test
+$target_app = $settings.Get_Item("target_app")
+# desired mode of process migration
+$migration_mode = $settings.Get_Item("migration_mode")
+# testing period in seconds, after which the test app is killed
+$testing_duration = $settings.Get_Item("testing_duration")
 
-# $pinfo = New-Object System.Diagnostics.ProcessStartInfo 
-# $pinfo.FileName = $app_name
-# $p = New-Object System.Diagnostics.Process
-# $p.StartInfo = $pinfo
-# $p.Start()
+# start stopwatch, to timeout if the test app is not found
+$stopwatch = [System.Diagnostics.Stopwatch]::new()
+$stopwatch.Start()
 
-#Wait until prime95 has been started by VTune script
-Start-Sleep -s 5
-
-#Either hardcode the process name (prime95), or receive from vtune-script
-#Uses Get-Process cmdlet which gets a process object given the name or PID of a running process
-$p = Get-Process prime95
+while($stopwatch.Elapsed.Seconds -lt $timeout){
+    $p = Get-Process $target_app -ErrorAction SilentlyContinue
+    if($p) {
+        # test app started, wait for launching to finish
+        Start-Sleep -s 2
+        # reacquire the process handle (because the original process may be recycled)
+        $p = Get-Process $target_app
+        break
+    }
+}
+# if timeout elapses, try one last time without suppressing errors
+if(!$p){
+    #Uses Get-Process cmdlet which gets a process object given the name or PID of a running process
+    $p = Get-Process $target_app
+}
 
 #Get the PID of the new process
 $procid  =  get-process $p.ProcessName |select -expand id
@@ -41,12 +55,17 @@ $logger.Start()
 #Wait until logging executable has begun to proceed
 Start-Sleep -m 50
 
-#Set processor affinity mask to a single core for baseline homogeneous testing
-$p.ProcessorAffinity=0x1
+if($migration_mode -eq "single"){
+    #Set processor affinity mask to a single core for baseline homogeneous testing
+    $p.ProcessorAffinity=0x1
+} elseif($migration_mode -eq "bounce"){
+    #Set processor affinity mask to bounce between two cores
 
-# either have this script terminate prime95 after some period of time, or we must manually kill
+} elseif($migration_mode -eq "rotation"){
+    #Set processor affinity mask to rotate between all cores
 
+}
 
 #Terminate running process, which should also end the logging executable
-Start-Sleep -s 15
+Start-Sleep -s $testing_duration
 $p.Kill()

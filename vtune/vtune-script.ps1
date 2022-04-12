@@ -8,9 +8,9 @@ $vtune_path = "C:\Program Files (x86)\Intel\oneAPI\vtune\2022.1.0"
 # path to vtune-vars.bat ; must be run before vtune will work
 $vars_path = Join-Path $vtune_path "vtune-vars.bat"
 
-# path of app to test
-#$app_path = "C:\Program Files (x86)\Notepad++\notepad++.exe"
-$app_path = ".\prime95\prime95.exe"
+# read path of app to test from cfg file
+Get-Content ".\cfg-vtune.txt" | ForEach-Object -Begin {$settings=@{}} -Process {$store = [regex]::split($_,'='); if(($store[0].CompareTo("") -ne 0) -and ($store[0].StartsWith("[") -ne $True) -and ($store[0].StartsWith("#") -ne $True)) {$settings.Add($store[0], $store[1])}}
+$app_path = $settings.Get_Item("test_path")
 
 # command for uarch-exploration
 $vtune_cmd = "vtune -collect uarch-exploration -- $app_path"

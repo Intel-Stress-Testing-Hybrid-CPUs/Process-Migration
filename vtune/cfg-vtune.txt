@@ -1,0 +1,2 @@
+[test_path]
+test_path=".\prime95\prime95.exe"
