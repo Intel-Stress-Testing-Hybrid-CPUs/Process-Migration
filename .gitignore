@@ -1,2 +1,4 @@
 # ignore the vtune run directories
 vtune/r0*/
+# system config for occt
+OCCT.config.json

@@ -1,8 +1,11 @@
 [target_app]
+# name of application to test
 target_app=prime95
 [timeout]
+# period in seconds to timeout after if the target app is not found
 timeout=30
 [migration_mode]
 migration_mode=single
 [testing_duration]
+# period in seconds, after which the target app is killed; set <= 0 to run indefinitely
 testing_duration=30

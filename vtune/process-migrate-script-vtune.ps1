@@ -66,6 +66,8 @@ if($migration_mode -eq "single"){
 
 }
 
-#Terminate running process, which should also end the logging executable
-Start-Sleep -s $testing_duration
-$p.Kill()
+# if testing_duration is positive, Terminate running process, which should also end the logging executable
+if($testing_duration -gt 0){
+    Start-Sleep -s $testing_duration
+    $p.Kill()
+}
