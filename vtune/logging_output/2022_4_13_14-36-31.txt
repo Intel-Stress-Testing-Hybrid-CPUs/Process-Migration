@@ -1,0 +1,4 @@
+PID of new process: 13204
+Handle Obtained Successfully
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1

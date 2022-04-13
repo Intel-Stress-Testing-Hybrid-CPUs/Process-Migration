@@ -5,7 +5,9 @@ target_app=prime95
 # period in seconds to timeout after if the target app is not found
 timeout=30
 [migration_mode]
+# uncomment desired mode -- single: set affinity to 0x1; bounce: set affinity 0x1 -> 0x8 -> 0x1 ...
 migration_mode=single
+#migration_mode=bounce
 [testing_duration]
 # period in seconds, after which the target app is killed; set <= 0 to run indefinitely
 testing_duration=30

@@ -55,19 +55,60 @@ $logger.Start()
 #Wait until logging executable has begun to proceed
 Start-Sleep -m 50
 
-if($migration_mode -eq "single"){
-    #Set processor affinity mask to a single core for baseline homogeneous testing
-    $p.ProcessorAffinity=0x1
-} elseif($migration_mode -eq "bounce"){
-    #Set processor affinity mask to bounce between two cores
-
-} elseif($migration_mode -eq "rotation"){
-    #Set processor affinity mask to rotate between all cores
-
-}
-
-# if testing_duration is positive, Terminate running process, which should also end the logging executable
+# if testing_duration is positive, migrate for testing_duration,
+#   then terminate running process, which should also end the logging executable
 if($testing_duration -gt 0){
-    Start-Sleep -s $testing_duration
+    # start stopwatch, to migrate for testing_duration
+    $stopwatch = [System.Diagnostics.Stopwatch]::new()
+    $stopwatch.Start()
+    
+    while($stopwatch.Elapsed.Seconds -lt $testing_duration){
+        if($p.HasExited){
+            # test process has terminated, so kill the logger and exit
+            $logger.Kill()
+            exit
+        }
+        if($migration_mode -eq "single"){
+            #Set processor affinity mask to a single core for baseline homogeneous testing
+            $p.ProcessorAffinity=0x1
+        } elseif($migration_mode -eq "bounce"){
+            #Set processor affinity mask to bounce between two cores
+            if($p.ProcessorAffinity -eq 0x1){
+                $p.ProcessorAffinity=0x8
+            } elseif($p.ProcessorAffinity -eq 0x8){
+                $p.ProcessorAffinity=0x1
+            }
+        } elseif($migration_mode -eq "rotation"){
+            #Set processor affinity mask to rotate between all cores
+        
+        }
+        # sleep between each migration
+        #Start-Sleep -m 50
+    }
     $p.Kill()
+} else {
+    # migrate indefinitely, until the process is manually killed
+    while($true){
+        if($p.HasExited){
+            # test process has terminated, so kill the logger and exit
+            $logger.Kill()
+            exit
+        }
+        if($migration_mode -eq "single"){
+            #Set processor affinity mask to a single core for baseline homogeneous testing
+            $p.ProcessorAffinity=0x1
+        } elseif($migration_mode -eq "bounce"){
+            #Set processor affinity mask to bounce between two cores
+            if($p.ProcessorAffinity -eq 0x1){
+                $p.ProcessorAffinity=0x8
+            } elseif($p.ProcessorAffinity -eq 0x8){
+                $p.ProcessorAffinity=0x1
+            }
+        } elseif($migration_mode -eq "rotation"){
+            #Set processor affinity mask to rotate between all cores
+        
+        }
+        # sleep between each migration
+        #Start-Sleep -m 50
+    }
 }

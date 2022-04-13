@@ -1,6 +1,6 @@
 OldCpuSpeed=3681
-NewCpuSpeedCount=0
-NewCpuSpeed=0
+NewCpuSpeedCount=1
+NewCpuSpeed=2645
 RollingAverage=1000
 RollingAverageIsFromV27=1
 WorkerThreads=1
