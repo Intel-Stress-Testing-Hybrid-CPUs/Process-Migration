@@ -9,8 +9,10 @@ $timeout = $settings.Get_Item("timeout")
 $target_app = $settings.Get_Item("target_app")
 # desired mode of process migration
 $migration_mode = $settings.Get_Item("migration_mode")
-# testing period in seconds, after which the test app is killed
+# testing period in seconds, after which the test app is killed; set <= 0 to run indefinitely
 $testing_duration = $settings.Get_Item("testing_duration")
+# period in seconds to sleep between migrations
+$migration_sleep_period = $settings.Get_Item("migration_sleep_period")
 
 # start stopwatch, to timeout if the test app is not found
 $stopwatch = [System.Diagnostics.Stopwatch]::new()
@@ -61,14 +63,16 @@ if($testing_duration -gt 0){
     # start stopwatch, to migrate for testing_duration
     $stopwatch = [System.Diagnostics.Stopwatch]::new()
     $stopwatch.Start()
-    
+
     while($stopwatch.Elapsed.Seconds -lt $testing_duration){
         if($p.HasExited){
             # test process has terminated, so kill the logger and exit
             $logger.Kill()
             exit
         }
-        if($migration_mode -eq "single"){
+        if($migration_mode -eq "none"){
+            # leave processor affinity mask alone
+        } elseif($migration_mode -eq "single"){
             #Set processor affinity mask to a single core for baseline homogeneous testing
             $p.ProcessorAffinity=0x1
         } elseif($migration_mode -eq "bounce"){
@@ -83,7 +87,7 @@ if($testing_duration -gt 0){
         
         }
         # sleep between each migration
-        #Start-Sleep -m 50
+        Start-Sleep -s $migration_sleep_period
     }
     $p.Kill()
 } else {
@@ -94,7 +98,9 @@ if($testing_duration -gt 0){
             $logger.Kill()
             exit
         }
-        if($migration_mode -eq "single"){
+        if($migration_mode -eq "none"){
+            # leave processor affinity mask alone
+        } elseif($migration_mode -eq "single"){
             #Set processor affinity mask to a single core for baseline homogeneous testing
             $p.ProcessorAffinity=0x1
         } elseif($migration_mode -eq "bounce"){
@@ -109,6 +115,6 @@ if($testing_duration -gt 0){
         
         }
         # sleep between each migration
-        #Start-Sleep -m 50
+        Start-Sleep -s $migration_sleep_period
     }
 }

@@ -1,2 +1,3 @@
 [test_path]
-test_path=".\prime95\prime95.exe"
+#test_path=".\prime95\prime95.exe"
+test_path=".\OCCT\OCCT.exe"
