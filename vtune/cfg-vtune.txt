@@ -1,3 +1,6 @@
 [test_path]
 #test_path=".\prime95\prime95.exe"
 test_path=".\OCCT\OCCT.exe"
+[analysis_mode]
+#uncomment desired mode
+analysis_mode=uarch_exploration

@@ -83,8 +83,37 @@ if($testing_duration -gt 0){
                 $p.ProcessorAffinity=0x1
             }
         } elseif($migration_mode -eq "rotation"){
-            #Set processor affinity mask to rotate between all cores
-        
+            #Set processor affinity mask to rotate between all 8 cores
+            if($p.ProcessorAffinity -eq 0x1){
+                $p.ProcessorAffinity=0x2
+            } elseif($p.ProcessorAffinity -eq 0x2){
+                $p.ProcessorAffinity=0x4
+            } elseif($p.ProcessorAffinity -eq 0x4){
+                $p.ProcessorAffinity=0x8
+            } elseif($p.ProcessorAffinity -eq 0x8){
+                $p.ProcessorAffinity=0x10
+            } elseif($p.ProcessorAffinity -eq 0x10){
+                $p.ProcessorAffinity=0x20
+            } elseif($p.ProcessorAffinity -eq 0x20){
+                $p.ProcessorAffinity=0x40
+            } elseif($p.ProcessorAffinity -eq 0x40){
+                $p.ProcessorAffinity=0x80
+            } elseif($p.ProcessorAffinity -eq 0x80){
+                $p.ProcessorAffinity=0x1
+            }
+        } elseif($migration_mode -eq "random"){
+            #Set processor affinity mask to migrate to random cores
+            $core = Get-Random -Maximum 8
+            switch($core){
+                0 {$p.ProcessorAffinity=0x1; break}
+                1 {$p.ProcessorAffinity=0x2; break}
+                2 {$p.ProcessorAffinity=0x4; break}
+                3 {$p.ProcessorAffinity=0x8; break}
+                4 {$p.ProcessorAffinity=0x10; break}
+                5 {$p.ProcessorAffinity=0x20; break}
+                6 {$p.ProcessorAffinity=0x40; break}
+                7 {$p.ProcessorAffinity=0x80; break}
+            }
         }
         # sleep between each migration
         Start-Sleep -s $migration_sleep_period
@@ -111,9 +140,39 @@ if($testing_duration -gt 0){
                 $p.ProcessorAffinity=0x1
             }
         } elseif($migration_mode -eq "rotation"){
-            #Set processor affinity mask to rotate between all cores
-        
+            #Set processor affinity mask to rotate between all 8 cores
+            if($p.ProcessorAffinity -eq 0x1){
+                $p.ProcessorAffinity=0x2
+            } elseif($p.ProcessorAffinity -eq 0x2){
+                $p.ProcessorAffinity=0x4
+            } elseif($p.ProcessorAffinity -eq 0x4){
+                $p.ProcessorAffinity=0x8
+            } elseif($p.ProcessorAffinity -eq 0x8){
+                $p.ProcessorAffinity=0x10
+            } elseif($p.ProcessorAffinity -eq 0x10){
+                $p.ProcessorAffinity=0x20
+            } elseif($p.ProcessorAffinity -eq 0x20){
+                $p.ProcessorAffinity=0x40
+            } elseif($p.ProcessorAffinity -eq 0x40){
+                $p.ProcessorAffinity=0x80
+            } elseif($p.ProcessorAffinity -eq 0x80){
+                $p.ProcessorAffinity=0x1
+            }
+        } elseif($migration_mode -eq "random"){
+            #Set processor affinity mask to migrate to random cores
+            $core = Get-Random -Maximum 8
+            switch($core){
+                0 {$p.ProcessorAffinity=0x1; break}
+                1 {$p.ProcessorAffinity=0x2; break}
+                2 {$p.ProcessorAffinity=0x4; break}
+                3 {$p.ProcessorAffinity=0x8; break}
+                4 {$p.ProcessorAffinity=0x10; break}
+                5 {$p.ProcessorAffinity=0x20; break}
+                6 {$p.ProcessorAffinity=0x40; break}
+                7 {$p.ProcessorAffinity=0x80; break}
+            }
         }
+
         # sleep between each migration
         Start-Sleep -s $migration_sleep_period
     }
