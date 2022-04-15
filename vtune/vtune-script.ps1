@@ -15,8 +15,7 @@ $app_path = $settings.Get_Item("test_path")
 # analysis mode for VTune to run in
 $analysis_mode = $settings.Get_Item("analysis_mode")
 
-
-# command for uarch-exploration
+# command for analysis mode to be run
 $vtune_cmd = "vtune -collect $analysis_mode -- $app_path"
 
 # get timestamp for output file
