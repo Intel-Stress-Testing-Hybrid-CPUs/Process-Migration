@@ -1,0 +1,17 @@
+PID of new process: 11664
+Handle Obtained Successfully
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1
+Process Affinity Mask: 8
+Process Affinity Mask: 1

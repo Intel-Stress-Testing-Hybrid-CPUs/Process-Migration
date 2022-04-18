@@ -81,6 +81,8 @@ if($testing_duration -gt 0){
                 $p.ProcessorAffinity=0x8
             } elseif($p.ProcessorAffinity -eq 0x8){
                 $p.ProcessorAffinity=0x1
+            } else {
+                $p.ProcessorAffinity=0x1
             }
         } elseif($migration_mode -eq "rotation"){
             #Set processor affinity mask to rotate between all 8 cores
@@ -99,6 +101,8 @@ if($testing_duration -gt 0){
             } elseif($p.ProcessorAffinity -eq 0x40){
                 $p.ProcessorAffinity=0x80
             } elseif($p.ProcessorAffinity -eq 0x80){
+                $p.ProcessorAffinity=0x1
+            } else {
                 $p.ProcessorAffinity=0x1
             }
         } elseif($migration_mode -eq "random"){
