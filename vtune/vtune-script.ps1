@@ -22,7 +22,7 @@ $vtune_cmd = "vtune -collect $analysis_mode -- $app_path"
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 
 # command to generate report to file
-$vtune_report = "vtune -report hw-events -report-width 60 -report-output ./results/$timestamp.txt"
+$vtune_report = "vtune -report hw-events -report-width 60 -report-output ./vtune_output/$timestamp.txt"
 
 # launch Coreinfo, with output redirected to a file
 .\Coreinfo\Coreinfo64.exe *> .\coreinfo_output\$timestamp-coreinfo.txt
