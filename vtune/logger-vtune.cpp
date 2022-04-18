@@ -59,7 +59,6 @@ int main(int argc, char* argv[]){
                 if(oldAffinityMask == lpProcessAffinityMask){
                     continue;
                 } else {
-                    oFile << "GetProcessAffinityMask was successful" << endl;
                     oFile << "Process Affinity Mask: " << lpProcessAffinityMask <<  endl;
                 }
             }
