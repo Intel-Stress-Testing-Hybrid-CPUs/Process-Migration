@@ -1,19 +1,20 @@
 [target_app]
 # name of application to test
-target_app=OCCT
+#target_app=OCCT
+target_app=prime95
 [timeout]
 # period in seconds to timeout after if the target app is not found
 timeout=30
 [migration_mode]
 # uncomment desired mode -- none: leave affinity alone; single: set affinity to 0x1; bounce: set affinity 0x1 -> 0x8 -> 0x1 ...; rotation: set affinity to rotate throught all 8 cores from 0x1 -> ... -> 0x80 -> 0x1 ...; random: set affinity to randomly assign to a core
-migration_mode=none
+#migration_mode=none
 #migration_mode=single
-#migration_mode=bounce
+migration_mode=bounce
 #migration_mode=rotation
 #migration_mode=random
 [testing_duration]
 # period in seconds, after which the target app is killed; set <= 0 to run indefinitely
-testing_duration=0
+testing_duration=30
 [migration_sleep_period]
 # period in seconds to sleep between migrations 
-migration_sleep_period=5
+migration_sleep_period=2

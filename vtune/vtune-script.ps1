@@ -14,6 +14,8 @@ Get-Content ".\cfg-vtune.txt" | ForEach-Object -Begin {$settings=@{}} -Process {
 $app_path = $settings.Get_Item("test_path")
 # analysis mode for VTune to run in
 $analysis_mode = $settings.Get_Item("analysis_mode")
+# report type for VTune to generate
+$report_type = $settings.Get_Item("report_type")
 
 # command for analysis mode to be run
 $vtune_cmd = "vtune -collect $analysis_mode -- $app_path"
@@ -22,7 +24,7 @@ $vtune_cmd = "vtune -collect $analysis_mode -- $app_path"
 $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
 
 # command to generate report to file
-$vtune_report = "vtune -report hw-events -report-width 60 -report-output ./vtune_output/$timestamp.txt"
+$vtune_report = "vtune -report $report_type -report-width 60 -report-output ./vtune_output/$timestamp.txt"
 
 # launch Coreinfo, with output redirected to a file
 .\Coreinfo\Coreinfo64.exe *> .\coreinfo_output\$timestamp-coreinfo.txt
