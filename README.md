@@ -1,7 +1,7 @@
 # Process-Migration
 Repository for all code pertaining to the objective of testing process migration and functional equivalence of cores on CPUs.
 
-##  `/vtune`Files
+##  Description of Repository Components
 ### `logger-vtune.cpp`
 C++ file that when passed a PID, latches itself onto the corresponding process and logs running information about that process in relation to the running core it is on.
 
