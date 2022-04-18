@@ -16,12 +16,16 @@ Powershell script for starting a process and retrieving its PID to then give as 
 Configurable settings for the `process-migrate-script-vtune.ps1`
 
 ### `vtune-script.ps1`
+Powershell script that runs VTune analysis on a chosen test. It also launches the migration script to be run on the chosen test as well. The results of the VTune analysis are output to `/vtune_output`.
 
 ### `cfg-vtune.txt`
+Configurable settings for `vtune-sctipt.ps1` such as test to be run and analysis mode for VTune.
 
 ### `/vtune_output`
+Results of VTune analysis are output to this directory.
 
 ### `/logging_output`
+Results of `logger-vtune.exe` are output to this directory.
 
 ### `/coreinfo_output`
 
