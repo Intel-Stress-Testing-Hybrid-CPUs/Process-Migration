@@ -28,12 +28,22 @@ Results of VTune analysis from `vtune-script.ps1`  are output to this directory.
 Results of `logger-vtune.exe` are output to this directory.
 
 ### `/coreinfo_output`
+Results of `Coreinfo64.exe` are output to this directory.
 
 ### `/Coreinfo`
+A command-line utility that displays the processor name and supported features, shows you the mapping between logical processors and the physical processor, NUMA node, and socket on which they reside, as well as the cache’s assigned to each logical processor. Coreinfo is useful for gaining insight into the processor and cache topology of your system. 
+
+Used by `vtune-script.ps1` to record this processor information to a timestamped file in `/coreinfo_output`.
 
 ### `/OCCT`
+A modern stability testing and benchmarking executable with a friendly GUI showing hardware info.
+Stability testing supports small to large data sets, and can test on 1 or more cores. Advanced thread settings allow periodic cycling between cores, a basic function of our `process-migrate-script-vtune.ps1`. Stability testing also logs any errors that occur during execution. 
+There is also Linpack-based stability testing which uses linear algebra for matrix calculations. 
+
+Can be used as a testing application workload for `vtune-script.ps1` and `process-migrate-script-vtune.ps1`. 
 
 ### `/prime95`
+A highly configurable stress-testing executable, searching for Mersenne Prime numbers by calculating FFTs.
+Can test 1 or more cores, with or without hyperthreading. The data set of FFTs used for calculations range from small to large, targeting the L1/L2 caches up to the L3 cache, memory controller, and RAM.
 
-
-
+Can be used as a testing application workload for `vtune-script.ps1` and `process-migrate-script-vtune.ps1`.
