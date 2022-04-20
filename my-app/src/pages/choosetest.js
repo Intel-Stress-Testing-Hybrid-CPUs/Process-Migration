@@ -3,14 +3,16 @@ import useScript from '../hooks/useScript'
 
 function Choosetest() {
 
-    //const VtuneScript = useScript('../../../vtune/vtune-script.ps1')
+    const VtuneScript = props => {
+            useScript('../../../vtune/vtune-script.ps1');       // Mount this somehow.
+    }
 
-    const [loaded, setloaded] = useState(false);
+    //const [loaded, setloaded] = useState(false);
 
-    const [Name, setName] = useState(()=> {
-        console.log('run inital Test')
-        return 'None' 
-    }) 
+    // const [Name, setName] = useState(()=> {
+    //     console.log('run inital Test')
+    //     return 'None' 
+    // }) 
 
     // const [Script, setScript] = useState(() => {    // Empty Script until they choose a test.
     //     console.log('Init empty Script')
@@ -19,15 +21,12 @@ function Choosetest() {
 
 
     function runVtune() {   // Add Script to this....
-        setCurrent(prevName => 'Vtune')
-        //useScript('../../../vtune/vtune-script.ps1')  //Figuring out URL/access...
+        console.log('button click')
+        //setName(prevName => 'Vtune')
+        //useScript(VtuneScript)  //Figuring out URL/access...
+        //setloaded(loaded => true)
     }
 
-    useEffect(() => {
-        console.log('useEffect')
-        if(!loaded) return;
-
-    }, [loaded])
 
     return (
         <div
@@ -38,17 +37,15 @@ function Choosetest() {
                 height: '100vh'
             }}
         >
-           <p>'Current test selected: ${VtuneScript}$'</p> 
-           <div>
-            <h1> {NameOfTest} Test</h1>
-            <button className="script" onClick={runVtune()}>
-                {loaded ? 'Test Ready' : 'Test not Ready'}
+           <h2>'Current test selected: Vtune'</h2> 
+           <span></span>
+            <button onClick={runVtune}>
+                Hello
             </button>
-            </div>
         </div>
         
     );
 };
-
+//{loaded ? 'Test Ready' : 'Test not Ready'}
 export default Choosetest;
 

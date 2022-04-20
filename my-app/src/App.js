@@ -6,7 +6,7 @@ import Home from './pages';
 import About from './pages/about';
 import Choosetest from './pages/choosetest';
 
-function App() {  // Add classnames to headers and such once more complex.
+function App() {  // Add classnames to headers and such once more complex. Also will add layout.
   return (
     <Router>
       <Navbar />
