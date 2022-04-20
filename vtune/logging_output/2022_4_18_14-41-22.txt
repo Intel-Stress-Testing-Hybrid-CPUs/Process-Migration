@@ -1,0 +1,17 @@
+PID of new process: 8112
+Handle Obtained Successfully
+Process Affinity Mask: 1
+Process Affinity Mask: 2
+Process Affinity Mask: 4
+Process Affinity Mask: 8
+Process Affinity Mask: 16
+Process Affinity Mask: 32
+Process Affinity Mask: 64
+Process Affinity Mask: 128
+Process Affinity Mask: 1
+Process Affinity Mask: 2
+Process Affinity Mask: 4
+Process Affinity Mask: 8
+Process Affinity Mask: 16
+Process Affinity Mask: 32
+Process Affinity Mask: 64

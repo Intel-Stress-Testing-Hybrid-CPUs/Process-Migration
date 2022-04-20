@@ -1,0 +1,4 @@
+PID of new process: 8940
+Handle Obtained Successfully
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1

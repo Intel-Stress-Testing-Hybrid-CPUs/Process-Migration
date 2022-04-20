@@ -1,0 +1,15 @@
+[test_path]
+test_path=".\prime95\prime95.exe"
+#test_path=".\OCCT\OCCT.exe"
+[analysis_mode]
+#uncomment desired mode
+analysis_mode=uarch-exploration
+#analysis_mode=hpc-performance
+#analysis_mode=memory-access
+#analysis_mode=io
+#analysis_mode=anomoly-detection
+#analysis_mode=threading
+#analysis_mode=hotspots
+#analysis_mode=memory-consumption
+[report_type]
+report_type=hw-events

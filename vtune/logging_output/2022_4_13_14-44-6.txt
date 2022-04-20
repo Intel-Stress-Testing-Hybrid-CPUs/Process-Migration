@@ -1,0 +1,32 @@
+PID of new process: 5864
+Handle Obtained Successfully
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
+GetProcessAffinityMask was successful
+Process Affinity Mask: 255
+GetProcessAffinityMask was successful
+Process Affinity Mask: 1
