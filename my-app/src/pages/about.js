@@ -11,6 +11,7 @@ const About = () => {
             }}
         >
             <h1>We are team I3 "Intel Hybrid CPU"</h1>
+            <p>Meet our team members?</p>
         </div>
     );
 };

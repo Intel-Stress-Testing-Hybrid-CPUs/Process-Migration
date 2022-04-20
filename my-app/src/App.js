@@ -1,13 +1,12 @@
 //import logo from './logo.svg';
 import './App.css';
-//import Script from './component/Script';
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './pages';
 import About from './pages/about';
 import Choosetest from './pages/choosetest';
 
-function App() {
+function App() {  // Add classnames to headers and such once more complex.
   return (
     <Router>
       <Navbar />
@@ -17,16 +16,10 @@ function App() {
         <Route exact path="/choosetest" element={<Choosetest/>} />
       </Routes>
     </Router>
-    // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
-
     //   </header>
-    //   <body>
-    //     <Script />
-    //   </body>
-    // </div>
   );
 }
-
+// Extra can add handle Resize
 export default App;

@@ -35,7 +35,7 @@ const Navbar = () => {
                   to="/choosetest" 
                   activeStyle={{ color: 'black' }}
                 >
-                    Choose Tests for Logger
+                    Test Suite
                 </NavLink>
                 {/* <NavBtn>
                     <NavBtnLink to="/sign-up">Sign Up</NavBtnLink>                

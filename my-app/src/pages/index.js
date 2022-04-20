@@ -11,7 +11,8 @@ const Home = () => {
         height: '100vh'
     }}
 >
-   <h1>Welcome</h1> 
+   <h1>Welcome to I3's Capstone Project.</h1>
+   <p>Insert paragraph explaining what we are doing.</p> 
 </div>
   )
 }
