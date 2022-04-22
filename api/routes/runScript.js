@@ -6,8 +6,13 @@ var router = express.Router();
 //     // do whatever with stdout
 // })
 
+
+
+router.get("/", function(req, res, next) {
+
+    
 var spawn = require("child_process").spawn,child;
-child = spawn("powershell.exe",["C:\Users\AndrewVu\Documents\GitHub\Process-Migration\vtune\vtune-script.ps1"]);
+child = spawn("powershell.exe",["C:\\Users\\AndrewVu\\Documents\\GitHub\\Process-Migration\\vtune\\vtune-script.ps1"]);
 child.stdout.on("data",function(data){
     console.log("Powershell Data: " + data);
 });
@@ -20,7 +25,6 @@ child.on("exit",function(){
 child.stdin.end(); //end input
 
 
-router.get("/", function(req, res, next) {
     res.send("Test ran");
 });
 
