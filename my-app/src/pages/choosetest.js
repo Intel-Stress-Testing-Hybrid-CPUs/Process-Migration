@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import useScript from '../hooks/useScript'
+//import {execa} from 'execa'
 
 function Choosetest() {
 
+    child_process.spawn()
+    
     const VtuneScript = props => {
             useScript('../../../vtune/vtune-script.ps1');       // Mount this somehow.
     }
